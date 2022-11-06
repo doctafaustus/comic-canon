@@ -48,3 +48,37 @@ navBtns.forEach(btn => {
 });
 
 
+let touchstartY = 0;
+let touchendY = 0;
+let touchstartX = 0;
+let touchendX = 0;
+let verticalTolerance = 40;
+
+document.addEventListener('touchstart', e => {
+  touchstartY = e.changedTouches[0].screenY;
+  touchstartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX;
+  touchendY = e.changedTouches[0].screenY;
+  checkDirection();
+});
+
+function checkDirection() {
+  console.log(touchstartY, touchendY);
+  console.log(Math.abs(touchstartY - touchendY));
+
+  if (Math.abs(touchstartY - touchendY) >= verticalTolerance) {
+    return console.log('vertical tolerance too high');
+  }
+
+  if (touchendX < touchstartX) {
+    console.log('swiped left!');
+    document.querySelector('#next').click();
+  }
+  if (touchendX > touchstartX) {
+    console.log('swiped right!');
+    document.querySelector('#prev').click();
+  }
+}
