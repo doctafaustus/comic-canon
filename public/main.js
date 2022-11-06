@@ -1,5 +1,6 @@
 const comics = [
   'https://i.redd.it/xxb6769j26y91.png',
+  'https://i.redd.it/j57gz5ztvux91.png',
   'https://i.redd.it/d83w4ocfc4y91.jpg',
   'https://i.redd.it/ahe7pwrj35y91.jpg',
   'https://i.redd.it/r4tcnty0m5y91.png',
@@ -10,7 +11,6 @@ const comics = [
   'https://i.redd.it/joe2jdc2x6y91.jpg',
   'https://i.redd.it/jyp9upa411y91.png',
   'https://i.redd.it/wqwbobfgg4y91.png',
-  'https://i.redd.it/j57gz5ztvux91.png',
   'https://i.redd.it/mu7ux779s7y91.png',
   'https://i.redd.it/xnfn4myph7y91.jpg',
   'https://i.redd.it/gv8er70bb6y91.png',
@@ -52,7 +52,9 @@ let touchstartY = 0;
 let touchendY = 0;
 let touchstartX = 0;
 let touchendX = 0;
+
 let verticalTolerance = 40;
+let horizontalTolerance = 40;
 
 document.addEventListener('touchstart', e => {
   touchstartY = e.changedTouches[0].screenY;
@@ -66,11 +68,12 @@ document.addEventListener('touchend', e => {
 });
 
 function checkDirection() {
-  console.log(touchstartY, touchendY);
-  console.log(Math.abs(touchstartY - touchendY));
-
   if (Math.abs(touchstartY - touchendY) >= verticalTolerance) {
     return console.log('vertical tolerance too high');
+  }
+
+  if (Math.abs(touchstartX - touchendX) <= horizontalTolerance) {
+    return console.log('horizontal tolerance too low');
   }
 
   if (touchendX < touchstartX) {
